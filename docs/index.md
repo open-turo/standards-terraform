@@ -1,0 +1,1 @@
+# Turo Terraform Development Standards
