@@ -1,0 +1,35 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+      - v.*
+permissions:
+  contents: write
+jobs:
+  deploy:
+    name: Release & Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - uses: actions/cache@v2
+        with:
+          key: ${{ github.ref }}
+          path: .cache
+      - run: pip install mkdocs-material
+      - name: Semantic release
+        id: release
+        uses: cycjimmy/semantic-release-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.OPEN_TURO_GITHUB_TOKEN }}
+        with:
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
+            @qiwi/semantic-release-gh-pages-plugin
