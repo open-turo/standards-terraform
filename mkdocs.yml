@@ -3,4 +3,4 @@ theme:
   name: material
 plugins:
   - search
-  - git-latest-release
+#  - git-latest-release
