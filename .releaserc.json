@@ -8,6 +8,11 @@
       "@semantic-release/github",
       "@semantic-release/npm",
       "@qiwi/semantic-release-gh-pages-plugin"
+    ],
+    "publish": [
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@qiwi/semantic-release-gh-pages-plugin"
     ]
   }
 }
