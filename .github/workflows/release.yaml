@@ -30,6 +30,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.OPEN_TURO_GITHUB_TOKEN }}
         with:
           extra_plugins: |
+            @open-turo/semantic-release-config
             @semantic-release/changelog
-            @semantic-release/git
             @qiwi/semantic-release-gh-pages-plugin
