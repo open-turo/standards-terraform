@@ -1,3 +1,6 @@
 site_name: Turo Terraform Standards
 theme:
   name: material
+plugins:
+  - search
+  - git-latest-release

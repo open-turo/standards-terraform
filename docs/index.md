@@ -1,4 +1,4 @@
-# Turo Terraform Development Standards
+# Turo Terraform Development Standards {{ git_latest_release }}
 
 ## Baseline standards
 
