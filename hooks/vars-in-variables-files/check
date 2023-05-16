@@ -1,0 +1,23 @@
+#!/bin/bash -e
+
+check_files() {
+	has_error=0
+	for file in "$@"; do
+
+		# grep the file to see if it has a line that start with 'variable "'
+		if [[ "$file" == */variables.*tf ]]; then
+			echo "variables file ok: $file"
+		elif grep -q "^variable \"" "$file"; then
+			echo "ERROR: $file MUST not contain variables"
+			has_error=1
+		fi
+	done
+	return $has_error
+}
+
+if ! check_files "$@"; then
+	echo "Variables defined in files that do not match our naming convention: 'variables[.grouping].tf'"
+	echo "See: https://open-turo.github.io/standards-terraform/modules/input-variables/"
+fi
+
+exit $has_error
