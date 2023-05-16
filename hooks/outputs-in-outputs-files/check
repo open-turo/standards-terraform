@@ -1,0 +1,24 @@
+#!/bin/bash -e
+
+check_files() {
+	has_error=0
+	for file in "$@"; do
+
+		# ignore files that start with outputs.
+		if [[ "$file" == */outputs.*tf ]]; then
+			echo "outputs file ok: $file"
+		# grep the file to see if it has a line that start with 'outputs "'
+		elif grep -q "^output \"" "$file"; then
+			echo "ERROR: $file MUST not contain outputs"
+			has_error=1
+		fi
+	done
+	return $has_error
+}
+
+if ! check_files "$@"; then
+	echo "outputs defined in files that do not match our naming convention: 'outputs[.grouping].tf'"
+	echo "See: https://open-turo.github.io/standards-terraform/modules/outputs/"
+fi
+
+exit $has_error

@@ -1,6 +1,3 @@
-######################
-# Yaml related hooks
-# These only have shell dependencies
 - id: vars-in-variables-files
   name: "Ensure that all variables are defined in files that have the following name format: `variables[.grouping].tf`"
   description: "Errors if a variable is defined in a file that does not start with `variables.`"
@@ -8,4 +5,11 @@
   language: script
   files: \.tf$
   exclude: ^variables\..*\.tf$
-  ######################
+
+- id: outputs-in-outputs-files
+  name: "Ensure that all outputs are defined in files that have the following name format: `outputs[.grouping].tf`"
+  description: "Errors if a outputs is defined in a file that does not start with `outputs.`"
+  entry: hooks/outputs-in-outputs-files/check
+  language: script
+  files: \.tf$
+  exclude: ^outputs\..*\.tf$
