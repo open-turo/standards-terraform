@@ -1,5 +1,5 @@
 - id: vars-in-variables-files
-  name: "Ensure that all variables are defined in files that have the following name format: `variables[.grouping].tf`"
+  name: "Ensure variables are in `variables[.grouping].tf`"
   description: "Errors if a variable is defined in a file that does not start with `variables.`"
   entry: hooks/vars-in-variables-files/check
   language: script
@@ -7,7 +7,7 @@
   exclude: ^variables\..*\.tf$
 
 - id: outputs-in-outputs-files
-  name: "Ensure that all outputs are defined in files that have the following name format: `outputs[.grouping].tf`"
+  name: "Ensure outputs are in `outputs[.grouping].tf`"
   description: "Errors if a outputs is defined in a file that does not start with `outputs.`"
   entry: hooks/outputs-in-outputs-files/check
   language: script
