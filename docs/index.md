@@ -19,6 +19,9 @@ We use the following standards as a baseline for all Terraform code at Turo:
 - Scripts to rule them all -- we use [scripts to rule them all](https://github.com/github/scripts-to-rule-them-all) to
   provide consistent usage and functionality across all repositories.
 
+This document will attempt to summarize what is important and provide links to other sources for more details and
+examples.
+
 ## `pre-commit` configuration
 
 We expect that all tf repos will have the following pre-commit configuration:
