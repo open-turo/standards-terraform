@@ -6,5 +6,7 @@ This is best implemented through deprecation first to add new/replacement functi
 now unused functionality.
 
 When creating a breaking change - you **MUST** include a markdown document in the `docs/breaking-changes` directory. It
-should be named `v<version>.md` where `<version>` is the new/breakign version. This document should explain the breaking
+should be named `v<version>.md` where `<version>` is the new/breaking version. This document should explain the breaking
 change and how to migrate to the new version.
+
+A template [here](templates/breaking-changes-doc-template.md), is a good starting point for your breaking changes markdown document.
