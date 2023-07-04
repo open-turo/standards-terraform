@@ -1,4 +1,4 @@
-# Upgrade from v[PREVIOUS].x to v[CURRENT].x
+# Upgrade from v**CURRENT**.x to v**NEXT**.x
 
 - Brief description of current major version release scope
 
