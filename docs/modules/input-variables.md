@@ -7,4 +7,4 @@ the developer **MAY** choose to group those variables in a file named `variables
 
 When module is to be sourced from outside the current GitHub repo, its variables **MUST** have a description.
 
-When variables are expected to be used as inputs to other modules, developers **SHOULD** attempt to structure them in a
+When variables are expected to be used as inputs to other modules, developers **SHOULD** attempt to structure them in a way that can be passed through without dereferencing.
