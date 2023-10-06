@@ -1,4 +1,6 @@
 # Style
 
-- [conditional-resource-creation](conditional-resource-creation.md) - Creating resources based on variables
-- [control-blocks](control-blocks.md) - How to use advanced control in Terraform
+We have strong style guides to ensure that our code is consistent and easy to read. We want to take discussing style
+_out_ of our review process.
+
+This section seeks to define the style and structure that everyone should follow.

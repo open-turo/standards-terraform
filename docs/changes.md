@@ -46,3 +46,8 @@ to ensure a new version of the standards is released but not that the actual sta
 | style    | no              | Changes due to code style, whitespace, or documentation linting                                |
 | build    | no              | Do not use - build is unused with terraform workspaces                                         |
 | perf     | no              | Do not use                                                                                     |
+
+## Folder Structure
+
+Folders should be used to create clean groupings. Each folder should contain a `README.md` that summarizes the folder's
+contents and provides links to any relevant documentation.
