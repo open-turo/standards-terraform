@@ -29,3 +29,10 @@ repos:
     hooks:
       - id: shellcheck
       - id: shfmt
+  - repo: local
+    hooks:
+      - id: kebab-case-only
+        name: kebab case only
+        entry: tf filenames must be lower-case only
+        language: fail
+        files: "[^a-z0-9./-]+\\.tf"
