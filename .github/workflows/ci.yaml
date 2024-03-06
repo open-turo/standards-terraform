@@ -20,7 +20,7 @@ jobs:
         with:
           repository: rhysd/actionlint
       - name: Pre-commit
-        uses: open-turo/action-pre-commit@v2
+        uses: open-turo/action-pre-commit@v3
 
   test:
     name: Test
