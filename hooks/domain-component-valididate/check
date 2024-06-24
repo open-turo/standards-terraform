@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
+# This script check if the component usage is valid:
+# allow case: <component>.tf
+# allow case: <component>-component/main.tf
+
 # Function to check if module names follow the 'component_<name>' convention
 check_component_module_id() {
 	local module_name="$1"
@@ -17,19 +21,19 @@ check_component_file_name() {
 	local file="$3"
 	local filename
 	local expected_file
-	local parent_directory
-	local parent_directory_name
 
 	filename=$(basename "$file")
 	expected_file="${component_name//_/-}.tf"
-	parent_directory=$(dirname "$file")
-	parent_directory_name=$(basename "$parent_directory")
 
-	if [[ "$filename" != "$expected_file" && ("$filename" != "main.tf" || ! "$parent_directory_name" =~ -component$) ]]; then
-		echo "ERROR: Module '$module_name' with name '$component_name' should be in '$expected_file' or a 'main.tf' within a directory ending with '-component', but found in '$filename'."
-		return 1
+	# allow <component>.tf
+	# allow components/<component>/main.tf
+	if [[ "$filename" = "$expected_file" || "$file" =~ components/${component_name}/main.tf ]]; then
+		return 0
 	fi
-	return 0
+
+	# otherwise, it will return an error
+	echo "ERROR: Module '$module_name' should be in '$expected_file' or 'components/$component_name/main.tf', but found in '$filename'."
+	return 1
 }
 
 check_component_files() {
