@@ -1,0 +1,35 @@
+#!/bin/bash -e
+
+# get the directory of the script
+script_directory="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+echo "testing: $script_directory"
+
+echo "testing: check $script_directory/fixtures/good-foo-bar.tf"
+"$script_directory/check" "$script_directory/fixtures/good-foo-bar.tf"
+
+echo "testing: check $script_directory/fixtures/good-component/main.tf"
+"$script_directory/check" "$script_directory/fixtures/good-component/main.tf"
+
+echo "testing: check $script_directory/fixtures/bad-folder/main.tf"
+echo "         expecting error"
+if "$script_directory/check" "$script_directory/fixtures/bad-folder/main.tf"; then
+	echo "ERROR: should have failed"
+	exit 1
+fi
+
+echo "testing: check $script_directory/fixtures/bad-foo-bar.tf"
+echo "         expecting error"
+if "$script_directory/check" "$script_directory/fixtures/bad-foo-bar.tf"; then
+	echo "ERROR: should have failed"
+	exit 1
+fi
+
+echo "testing: check $script_directory/fixtures/bad-component.tf"
+echo "         expecting error"
+if "$script_directory/check" "$script_directory/fixtures/bad-component.tf"; then
+	echo "ERROR: should have failed"
+	exit 1
+fi
+
+echo "testing: PASS"

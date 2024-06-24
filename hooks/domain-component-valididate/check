@@ -1,0 +1,67 @@
+#!/bin/bash -e
+
+# Function to check if module names follow the 'component_<name>' convention
+check_component_module_id() {
+	local module_name="$1"
+	if [[ ! "$module_name" =~ ^component_ ]]; then
+		echo "ERROR: Module name '$module_name' does not follow the 'component_<name>' naming convention."
+		return 1
+	fi
+	return 0
+}
+
+# Function to check if the filename matches the expected filename derived from the module 'name' attribute
+check_component_file_name() {
+	local module_name="$1"
+	local component_name="$2"
+	local file="$3"
+	local filename
+	local expected_file
+	local parent_directory
+	local parent_directory_name
+
+	filename=$(basename "$file")
+	expected_file="${component_name//_/-}.tf"
+	parent_directory=$(dirname "$file")
+	parent_directory_name=$(basename "$parent_directory")
+
+	if [[ "$filename" != "$expected_file" && ("$filename" != "main.tf" || ! "$parent_directory_name" =~ -component$) ]]; then
+		echo "ERROR: Module '$module_name' with name '$component_name' should be in '$expected_file' or a 'main.tf' within a directory ending with '-component', but found in '$filename'."
+		return 1
+	fi
+	return 0
+}
+
+check_component_files() {
+	has_error=0
+	for file in "$@"; do
+		# Check only '.tf' files to avoid processing other file types
+		if [[ "$file" == *.tf ]]; then
+			# Read through the file line by line to find module blocks and extract the 'name' field
+			module_name=""
+			while IFS= read -r line || [[ -n "$line" ]]; do
+				# Check if the line declares a module
+				if [[ "$line" =~ ^module\ \" ]]; then
+					module_name=$(echo "$line" | awk -F\" '{print $2}')
+					check_component_module_id "$module_name" || has_error=1
+				fi
+				# When module_name is set, look for the name attribute within the block
+				if [[ -n "$module_name" && "$line" =~ ^\ *name\ *= ]]; then
+					component_name=$(echo "$line" | awk -F\" '{print $2}')
+					check_component_file_name "$module_name" "$component_name" "$file" || has_error=1
+					# Reset module_name to ensure correct block processing
+					module_name=""
+				fi
+			done < <(cat "$file")
+		fi
+	done
+	return $has_error
+}
+
+# Execute the check across all .tf files passed as arguments
+if ! check_component_files "$@"; then
+	echo "components defined in the files that do not match our naming convention: '<component-name>.tf' or 'main.tf' within a directory ending with '-component'."
+	echo "See: https://open-turo.github.io/standards-terraform/modules/component/"
+fi
+
+exit $has_error
