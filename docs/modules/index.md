@@ -9,5 +9,6 @@ We use modules for a few reasons:
 See:
 
 - [breaking-changes](breaking-changes.md)
+- [component](component.md)
 - [input-variables](input-variables.md)
 - [output-variables](output-variables.md)
