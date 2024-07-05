@@ -10,17 +10,10 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: mfinelli/setup-shfmt@v3
-      - name: Install actionlint
-        uses: open-turo/action-install-release@v1
+      - uses: open-turo/actions-gha/lint@v2
         with:
-          repository: rhysd/actionlint
-      - name: Pre-commit
-        uses: open-turo/action-pre-commit@v3
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   test:
     name: Test
