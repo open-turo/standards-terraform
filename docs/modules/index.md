@@ -11,3 +11,4 @@ See:
 - [breaking-changes](breaking-changes.md)
 - [input-variables](input-variables.md)
 - [output-variables](output-variables.md)
+- [tests](tests.md)
