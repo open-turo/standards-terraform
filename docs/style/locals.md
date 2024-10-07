@@ -1,4 +1,4 @@
-## Locals & Data
+# Locals & Data
 
 ## Hardcoded values
 
@@ -12,7 +12,7 @@ locals {
 }
 
 principals {
-  type        = "AWS"
+  type = "AWS"
   identifiers = [local.segment_aws_identifier]
 }
 ```
@@ -21,7 +21,27 @@ principals {
 
 ```hcl
 principals {
-  type        = "AWS"
+  type = "AWS"
   identifiers = ["arn:aws:iam::107630771604:user/s3-copy"]
+}
+```
+
+## Copying variables into locals
+
+Only copy variables into locals if you are performing an operation on them, do not simply copy them for the sake of it. Simply copying variables into locals causes needless duplication and makes the code harder to read. Additionally, it often results in code completion that is not able to function as effectively.
+
+### Do this
+
+```hcl
+locals {
+  bucket_wildcard_arn = "${var.bucket_arn}/*"
+}
+```
+
+### Not this
+
+```hcl
+locals {
+  bucket_arn = var.bucket_arn
 }
 ```
