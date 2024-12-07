@@ -13,3 +13,11 @@
   language: script
   files: \.tf$
   exclude: ^outputs\..*\.tf$
+
+- id: provider-pinned-versions
+  name: "Ensures provider versions are pinned.`"
+  description: "Ensures Terraform providers are pinned and not in a constrained format."
+  entry: hooks/provider-pinned-versions/check
+  language: script
+  files: \.tf$
+  exclude: ^(variables|outputs)\.{0,1}.*\.tf$
