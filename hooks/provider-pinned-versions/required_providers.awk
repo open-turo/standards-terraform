@@ -5,7 +5,6 @@ BEGIN {
     brace_count = 0;
     version_prefix_regex = ".*version[[:space:]]+=[[:space:]]+";
     provider_prefix_regex = "[a-z_-]+[[:space:]]+=[[:space:]]+\{";
-    pinned_version_regex = "[0-9]+\.[0-9]+\.[0-9]+";
     version_constraints_regex = "[!~><]+";
 }
 
