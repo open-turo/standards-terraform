@@ -4,7 +4,7 @@
   entry: hooks/vars-in-variables-files/check
   language: script
   files: \.tf$
-  exclude: ^variables\..*\.tf$
+  exclude: ^variables[\.]{0,1}.*\.tf$
 
 - id: outputs-in-outputs-files
   name: "Ensure outputs are in `outputs[.grouping].tf`"
@@ -12,7 +12,7 @@
   entry: hooks/outputs-in-outputs-files/check
   language: script
   files: \.tf$
-  exclude: ^outputs\..*\.tf$
+  exclude: ^outputs[\.]{0,1}.*\.tf$
 
 - id: provider-pinned-versions
   name: "Ensures provider versions are pinned.`"
