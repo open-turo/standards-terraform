@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+AWK_FILE="${SCRIPT_DIR}/required_providers.awk"
+
+check_files() {
+	has_error=0
+	for file in "$@"; do
+		awk -f "$AWK_FILE" "$file" || has_error=1
+	done
+	return $has_error
+}
+
+check_files "$@"
+exit $has_error

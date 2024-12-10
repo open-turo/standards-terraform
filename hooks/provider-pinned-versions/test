@@ -1,0 +1,26 @@
+#!/bin/bash -e
+
+# get the directory of the script
+script_directory="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+echo "testing: $script_directory"
+
+# shellcheck disable=SC2207
+files=($(find "$script_directory"/fixtures -type f -name "pass_*.tf"))
+for file in "${files[@]}"; do
+	echo "testing: check $file"
+	"$script_directory/check" "$file"
+done
+
+# shellcheck disable=SC2207
+files=($(find "$script_directory"/fixtures -type f -name "fail_*.tf"))
+for file in "${files[@]}"; do
+	echo "testing: check $file"
+	echo "         expecting error"
+	if "$script_directory/check" "$file"; then
+		echo "ERROR: should have failed"
+		exit 1
+	fi
+done
+
+echo "testing: PASS"
