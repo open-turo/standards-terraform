@@ -4,7 +4,7 @@ BEGIN {
     in_required_providers = 0;
     brace_count = 0;
     version_prefix_regex = ".*version[[:space:]]+=[[:space:]]+";
-    provider_prefix_regex = "[a-z_-]+[[:space:]]+=[[:space:]]+\{";
+    provider_prefix_regex = "[a-z_-]+[[:space:]]+=[[:space:]]+{";
     version_constraints_regex = "[!~><]+";
 }
 
