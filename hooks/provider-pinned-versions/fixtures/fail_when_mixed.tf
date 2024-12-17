@@ -8,7 +8,7 @@ terraform {
     }
     newrelic = {
       source  = "newrelic/newrelic"
-      version = ">=2, <3"
+      version = "< 4"
     }
   }
 }
