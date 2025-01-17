@@ -4,7 +4,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.83.1"
+      version = "5.84.0"
     }
     cyral = {
       source  = "cyralinc/cyral"
@@ -12,7 +12,7 @@ terraform {
     }
     mysql = {
       source  = "petoju/mysql"
-      version = "3.0.68"
+      version = "3.0.69"
     }
     newrelic = {
       source  = "newrelic/newrelic"
