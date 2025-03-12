@@ -41,7 +41,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.13"
       - name: Install MkDocs and Material for MkDocs
         run: pip install mkdocs[i18n] mkdocs-material
       - name: Install Pillow and CairoSVG (required for social card generation)
