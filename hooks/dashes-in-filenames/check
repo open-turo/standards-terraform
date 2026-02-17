@@ -1,0 +1,22 @@
+#!/bin/bash -e
+
+check_files() {
+	has_error=0
+	for file in "$@"; do
+		# get the basename of the file
+		filename=$(basename "$file")
+
+		# check if the filename contains underscores
+		if [[ "$filename" == *_* ]]; then
+			echo "ERROR: $file contains underscores in filename"
+			has_error=1
+		fi
+	done
+	return $has_error
+}
+
+if ! check_files "$@"; then
+	echo "Terraform files must use dashes instead of underscores in filenames"
+fi
+
+exit $has_error

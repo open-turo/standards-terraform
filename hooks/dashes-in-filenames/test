@@ -1,0 +1,22 @@
+#!/bin/bash -e
+
+# get the directory of the script
+script_directory="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+echo "testing: $script_directory"
+
+echo "testing: check $script_directory/fixtures/valid-file.tf"
+"$script_directory/check" "$script_directory/fixtures/valid-file.tf"
+
+echo "testing: check $script_directory/fixtures/another-valid-file.tf"
+"$script_directory/check" "$script_directory/fixtures/another-valid-file.tf"
+
+# check to see if the next file failed
+echo "testing: check $script_directory/fixtures/invalid_file.tf"
+echo "         expecting error"
+if "$script_directory/check" "$script_directory/fixtures/invalid_file.tf"; then
+	echo "ERROR: should have failed"
+	exit 1
+fi
+
+echo "testing: PASS"
