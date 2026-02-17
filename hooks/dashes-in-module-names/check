@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+check_files() {
+	has_error=0
+	checked_dirs=""
+
+	for file in "$@"; do
+		# get the directory containing the file
+		dir=$(dirname "$file")
+
+		# skip if we've already checked this directory
+		if echo "$checked_dirs" | grep -q "^${dir}$"; then
+			continue
+		fi
+		checked_dirs="${checked_dirs}${dir}"$'\n'
+
+		# get the directory name (basename of the directory path)
+		dirname=$(basename "$dir")
+
+		# check if the directory name contains underscores
+		if [[ "$dirname" == *_* ]]; then
+			echo "ERROR: $dir contains underscores in module directory name"
+			has_error=1
+		fi
+	done
+	return $has_error
+}
+
+if ! check_files "$@"; then
+	echo "Terraform module directories must use dashes instead of underscores in directory names"
+fi
+
+exit $has_error

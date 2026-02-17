@@ -28,3 +28,10 @@
   entry: hooks/dashes-in-filenames/check
   language: script
   files: \.tf$
+
+- id: dashes-in-module-names
+  name: "Ensure Terraform module directories use dashes instead of underscores"
+  description: "Errors if a Terraform module directory contains underscores in its name."
+  entry: hooks/dashes-in-module-names/check
+  language: script
+  files: \.tf$
