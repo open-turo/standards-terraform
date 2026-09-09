@@ -12,11 +12,11 @@ terraform {
     }
     mysql = {
       source  = "petoju/mysql"
-      version = "3.0.95"
+      version = "3.0.96"
     }
     newrelic = {
       source  = "newrelic/newrelic"
-      version = "3.97.2"
+      version = "3.97.3"
     }
   }
 }
