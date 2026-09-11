@@ -3,7 +3,7 @@ terraform {
 
   required_providers {
     aws = {
-      version = "6.63.0"
+      version = "6.64.0"
       source  = "hashicorp/aws"
     }
     cyral = {
