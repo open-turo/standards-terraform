@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: mfinelli/setup-shfmt@v4
-      - uses: open-turo/actions-gha/lint@v2
+      - uses: open-turo/actions-gha/lint@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
