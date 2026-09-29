@@ -68,7 +68,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: open-turo/actions-gha/release@v2
+      - uses: open-turo/actions-gha/release@v3
 
   # Deployment job
   deploy:
